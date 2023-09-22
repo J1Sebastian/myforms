@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -31,8 +30,8 @@ function App() {
   const clickSubmit = (() => {
     if (formValues.email.includes("@uniandes.edu.co")) {
       setValidationStates({ ...validationStates, emailState: true })
-      if (validationStates.emailState && validationStates.passwordState) {
-        alert(JSON.stringify(formValues))
+      if (validationStates.passwordState) {
+        alert("Operacion Exitosa. Datos guardados: " + JSON.stringify(formValues))
       }
     }
     else {
@@ -40,20 +39,7 @@ function App() {
     }
   });
 
-  useEffect(() => {
-    // true && true = true
-    // true && false = false
-    // false && true = false
-    // false && false = false
-    
-  });
-
-
   const [validationStates, setValidationStates] = useState({ emailState: true, passwordState: true })
-
-
-
-
 
   return (
     <div>
@@ -63,7 +49,7 @@ function App() {
         <Form.Group className="mb-6" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} value={formValues.email} isInvalid={!validationStates.emailState} />
-          <Form.Control.Feedback type="invalid"> Your email should be a uniandes email</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid"> Your email should follow an established format (@uniandes.edu.co)</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
