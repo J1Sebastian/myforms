@@ -28,11 +28,13 @@ function App() {
   });
 
   const clickSubmit = (() => {
-    if (formValues.email.includes("@uniandes.edu.co")) {
+    if (formValues.email.split("@")[0].length > 0 && formValues.email.includes("@uniandes.edu.co")){
       setValidationStates({ ...validationStates, emailState: true })
-      if (validationStates.passwordState) {
-        alert("Operacion Exitosa. Datos guardados: " + JSON.stringify(formValues))
-      }
+      setTimeout(() => {
+        if (validationStates.passwordState) {
+          alert("Operacion Exitosa. Datos guardados: " + JSON.stringify(formValues))
+        }
+      }, 0);
     }
     else {
       setValidationStates({ ...validationStates, emailState: false })
@@ -49,7 +51,7 @@ function App() {
         <Form.Group className="mb-6" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} value={formValues.email} isInvalid={!validationStates.emailState} />
-          <Form.Control.Feedback type="invalid"> Your email should follow an established format (@uniandes.edu.co)</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid"> Your email should follow an established format (x@uniandes.edu.co)</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
